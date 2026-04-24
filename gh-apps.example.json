@@ -1,0 +1,13 @@
+{
+	"timeout_ms": 30000,
+	"apps": [
+		{
+			"name": "example-app",
+			"description": "GitHub CLI, work seamlessly with GitHub from the command line.",
+			"timeout_ms": 30000
+		},
+		{
+			"name": "no-optional-params"
+		}
+	]
+}
