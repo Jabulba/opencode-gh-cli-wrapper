@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'bun:test';
 import { getToolExecutor } from '../../src/tool-executor';
-import { TokenProvider } from '../../src/token-provider';
+import type { TokenProvider } from '../../src/token-provider';
 import type { ToolContext } from '@opencode-ai/plugin';
 import { makeMockSubprocess } from '../test-utils/subprocess-mock';
 import { makeTestToolContext } from '../test-utils/context-factories';
@@ -11,13 +11,6 @@ import { makeTestToolContext } from '../test-utils/context-factories';
 
 const mockGetInstallationToken = vi.fn();
 const mockInvalidate = vi.fn();
-
-void vi.mock('../../src/token-provider', () => ({
-	TokenProvider: vi.fn(() => ({
-		getInstallationToken: mockGetInstallationToken,
-		invalidate: mockInvalidate,
-	})),
-}));
 
 // ---------------------------------------------------------------------------
 // Tests
@@ -31,7 +24,10 @@ describe('getToolExecutor', () => {
 		mockGetInstallationToken.mockClear();
 		mockInvalidate.mockClear();
 		toolCtx = makeTestToolContext({ sessionID: 'test-session', messageID: 'test-message', agent: 'test-agent', directory: '/tmp/dir', });
-		mockTokenProvider = new TokenProvider();
+		mockTokenProvider = {
+			getInstallationToken: mockGetInstallationToken,
+			invalidate: mockInvalidate,
+		} as unknown as TokenProvider;
 		// Mock Bun.spawn so getExecWithToken does not actually spawn a process
 		(Bun as any).spawn = vi.fn(() => makeMockSubprocess());
 	});

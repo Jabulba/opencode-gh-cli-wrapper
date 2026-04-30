@@ -20,13 +20,13 @@
 		"gh-apps.example.json"
 	],
 	"scripts": {
-		"test": "bun test --only-failures",
-		"coverage": "bun test --only-failures --coverage",
+		"test": "bun test --only-failures --parallel",
+		"coverage": "bun test --only-failures --coverage --parallel",
 		"typecheck": "tsc --noEmit",
 		"lint": "eslint .",
 		"lintf": "eslint . --fix",
 		"build": "bun run build.ts",
-		"prepack": "bun run typecheck && bun run lint && bun run test && bun run build",
+		"prepack": "bun run typecheck && bun run lint && bun run test --only-failures --parallel && bun run build",
 		"install": "bun run build.ts --install"
 	},
 	"keywords": [
@@ -52,14 +52,14 @@
 		"@opencode-ai/plugin": "^1.14.18",
 		"shell-quote": "^1.8.3",
 		"octokit": "^5.0.5",
-		"zod": "^4.4.1"
+		"zod": "^4.1.8"
 	},
 	"devDependencies": {
 		"@stylistic/eslint-plugin": "^5.10.0",
 		"@types/shell-quote": "^1.7.5",
-		"@typescript-eslint/eslint-plugin": "^8.58.2",
-		"@typescript-eslint/parser": "^8.58.2",
-		"bun-types": "^1.3.12",
+		"@typescript-eslint/eslint-plugin": "^8.59.1",
+		"@typescript-eslint/parser": "^8.59.1",
+		"bun-types": "^1.3.13",
 		"eslint": "^10.2.1",
 		"typescript": "^6.0.3"
 	}

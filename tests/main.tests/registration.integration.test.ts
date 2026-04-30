@@ -25,6 +25,7 @@ import { GitHubCLIWrapper } from '../../src/main';
 
 describe('GitHubCLIWrapper registration', () => {
 	beforeEach(() => {
+		global.console.warn = vi.fn();
 		resetIntegrationMocks(mockFsReadFile, mockAppCtor, mockGetInstallationOctokit, mockAuth, mockSpawn);
 		(Bun as any).spawn = mockSpawn;
 	});
