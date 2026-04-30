@@ -20,8 +20,8 @@
 		"gh-apps.example.json"
 	],
 	"scripts": {
-		"test": "bun test --only-failures --parallel",
-		"coverage": "bun test --only-failures --coverage --parallel",
+		"test": "bun test --only-failures",
+		"coverage": "bun test --only-failures --coverage",
 		"typecheck": "tsc --noEmit",
 		"lint": "eslint .",
 		"lintf": "eslint . --fix",
