@@ -71,6 +71,9 @@ gh-my-app: Execute GitHub operations as my-app. Provide arguments as gh CLI.
 
 The configuration file is a JSON object with global defaults and an `apps` array:
 
+App names are normalized to lowercase, spaces replaced with hyphens, non-alphanumeric characters (except hyphens) removed, and diacritics stripped. Names are truncated to 34 characters to comply with GitHub App naming constraints.
+
+
 ```json
 {
   "timeout_ms": 60000,
@@ -83,15 +86,13 @@ The configuration file is a JSON object with global defaults and an `apps` array
 }
 ```
 
-Each entry requires corresponding environment variables with a suffix derived from the app name:
+Each entry requires corresponding environment variables with a suffix derived from the app name by converting it to SCREAMING_SNAKE_CASE (e.g., `my-app` → `MY_APP`).
 
 | Variable | Description |
 |----------|-------------|
 | `GH_APP_ID_<SUFFIX>` | GitHub App numeric ID |
 | `GH_INSTALL_ID_<SUFFIX>` | GitHub App Installation ID |
 | `GH_PEM_PATH_<SUFFIX>` | Absolute path to the PEM private key file |
-
-The suffix is derived by converting the app name to a normalized SCREAMING_SNAKE_CASE (e.g., `my-app` → `MY_APP`).
 
 ## Environment Variables
 
@@ -139,10 +140,6 @@ bun run install
 ## License
 
 MIT
-
-## Name Normalization
-
-App names are normalized to lowercase, spaces replaced with hyphens, non-alphanumeric characters (except hyphens) removed, and diacritics stripped. Names are truncated to 34 characters to comply with GitHub App naming constraints.
 
 ## Trademark Notice
 
